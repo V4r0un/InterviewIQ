@@ -29,7 +29,7 @@ const Auth = ({isModel = false}) => {
   }
 
   return (
-    <div className={`w-full ${isModel ? "py-4" : "min-h-screen bg-[#f3f3f3] flex items-center justify-center px-6 py-20"}`}>
+    <div className={` ${isModel ? "py-4" : "min-h-screen bg-[#f3f3f3] flex items-center justify-center px-6 py-20"}`}>
       <motion.div
       initial={{opacity:0 , y:-40}}
       animate={{opacity:1 , y:0}}
@@ -46,7 +46,7 @@ const Auth = ({isModel = false}) => {
           <span className='bg-green-100 text-green-600 px-3 py-1 rounded-full inline-flex items-center gap-2'><IoSparkles size={18}/>AI Smart Interview</span>
         </h1>
         <p className='text-gray-500 text-center text-sm md:text-base leading-relaxed mb-8'>
-          Sign in to start AI-powerwed mock interviews, track your progress, and unlock detailed performance insights.
+          Sign in to start AI-powered mock interviews, track your progress, and unlock detailed performance insights.
         </p>
         <motion.button
         onClick={handleGoogleAuth}
