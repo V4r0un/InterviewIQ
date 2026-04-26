@@ -14,20 +14,29 @@ const Auth = ({isModel = false}) => {
 
   const dispatch = useDispatch()
 
-  const handleGoogleAuth = async () => {
-    try {
-      const response = await signInWithPopup(auth, provider)
-      let User = response.user
-      let name = User.displayName
-      let email = User.email
-      const result = await axios.post(`${serverUrl}/api/auth/google`, { name, email }, {withCredentials: true})
-      dispatch(setUserData(result.data))
-    } catch (error) {
-      console.log(error)
-      dispatch(setUserData(null))
-    }
-  }
+  let isSigningIn = false;
 
+  const handleGoogleAuth = async () => {
+    if (isSigningIn) return;
+    isSigningIn = true;
+    try {
+      const response = await signInWithPopup(auth, provider);
+      const user = response.user;
+      const name = user.displayName;
+      const email = user.email;
+      const result = await axios.post(
+        `${serverUrl}/api/auth/google`,
+        { name, email },
+        { withCredentials: true }
+      );
+      dispatch(setUserData(result.data));
+    } catch (error) {
+      console.log(error);
+      dispatch(setUserData(null));
+    } finally {
+      isSigningIn = false;
+    }
+  };
   return (
     <div className={` ${isModel ? "py-4" : "min-h-screen bg-[#f3f3f3] flex items-center justify-center px-6 py-20"}`}>
       <motion.div
